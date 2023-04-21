@@ -27,7 +27,7 @@ typedef struct HuffmanNode {
 typedef struct HuffmanTree {
     HuffmanNode* root;
 } HuffmanTree;
------------------------------------------------------------------------
+----------------------------------------------------------
 MinHeapNode* newMinHeapNode(char data, unsigned freq) {
     MinHeapNode* node = (struct MinHeapNode*)malloc(sizeof(struct MinHeapNode));
     node->left = node->right = NULL;
@@ -43,7 +43,7 @@ MinHeap* createMinHeap(unsigned capacity) {
     minHeap->array = (MinHeapNode**)malloc(minHeap->capacity * sizeof(MinHeapNode*));
     return minHeap;
 }
--------------------------------------------------------------------
+------------------------------------------------------------
 void swapMinHeapNode(MinHeapNode **a, MinHeapNode **b) {
     MinHeapNode* t = *a;
     *a = *b;
@@ -175,6 +175,7 @@ void encode(FILE* input_fp, FILE* output_fp, FILE* code_fp) {
         fputc(buffer, output_fp);
     }
 }
+
 =========================================================
 
 int main() {
