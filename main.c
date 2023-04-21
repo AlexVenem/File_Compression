@@ -5,7 +5,7 @@
 #include <string.h>
 
 #define MAX_TREE_HT 256
-
+======================================================
 typedef struct MinHeapNode {
     char data;
     unsigned freq;
@@ -27,7 +27,7 @@ typedef struct HuffmanNode {
 typedef struct HuffmanTree {
     HuffmanNode* root;
 } HuffmanTree;
-
+-----------------------------------------------------------------------
 MinHeapNode* newMinHeapNode(char data, unsigned freq) {
     MinHeapNode* node = (struct MinHeapNode*)malloc(sizeof(struct MinHeapNode));
     node->left = node->right = NULL;
@@ -43,7 +43,7 @@ MinHeap* createMinHeap(unsigned capacity) {
     minHeap->array = (MinHeapNode**)malloc(minHeap->capacity * sizeof(MinHeapNode*));
     return minHeap;
 }
-
+-------------------------------------------------------------------
 void swapMinHeapNode(MinHeapNode **a, MinHeapNode **b) {
     MinHeapNode* t = *a;
     *a = *b;
@@ -175,13 +175,14 @@ void encode(FILE* input_fp, FILE* output_fp, FILE* code_fp) {
         fputc(buffer, output_fp);
     }
 }
-
+=========================================================
 
 int main() {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE);  //changing the colors
     printf("Hello, my user.\nThis program allows you to compress files using the Huffman algorithm."
         "\nFirst, create a file and write its name to the console.\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);  //changing the colors back
+    
     char from[50];
     scanf("%s", from);
     FILE* input_fp = fopen(from, "rb");
@@ -192,12 +193,13 @@ int main() {
     printf("output_fp = %p\n", output_fp);
     printf("code_fp = %p\n", code_fp);
 
-    if (!input_fp) {
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | BACKGROUND_RED);
+    if (!input_fp) {                //input mistake
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | BACKGROUND_RED);  //colors
         fprintf(stderr, "Error while opening files\n");
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);  //colors back
         return 1;
     }
+    
     fseek(input_fp, 0L, SEEK_END);
     long length = ftell(input_fp);
     char freq[MAX_TREE_HT];
@@ -210,6 +212,7 @@ int main() {
     //    printf("code_fp = %p\n", code_fp);
 
     encode(input_fp, output_fp, code_fp);
+    
     fclose(input_fp);
     fclose(output_fp);
     fclose(code_fp);
